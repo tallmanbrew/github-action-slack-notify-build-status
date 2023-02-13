@@ -1,3 +1,7 @@
+# Action
+
+This action is a fork from https://github.com/voxmedia/github-action-slack-notify-build however that repo has gone unmanaged for some time. I hope to keep this in a running state, probably not much if any new development as it works for our needs.
+
 # Slack Notify Build
 
 This action prints your GitHub Action build status to Slack. It takes an opinionated approach by showing attachments for metadata like branch, pull request, and event. This action allows [existing messages to be updated](#updating-an-existing-message) to reduce unwanted noise in your Slack channel. Heavily-inspired by [Post Slack messages](https://github.com/marketplace/actions/post-slack-message).
@@ -7,7 +11,7 @@ A [Slack bot token](https://api.slack.com/docs/token-types) is required to use t
 ## Usage
 
 ```yaml
-uses: voxmedia/github-action-slack-notify-build@v1
+uses: tallmanbrew/github-action-slack-notify-build-status@v1
 with:
   channel: app-alerts
   status: STARTED
@@ -38,7 +42,7 @@ Note: You must assign a step `id` to the first Slack notification step in order 
   id: slack # IMPORTANT: reference this step ID value in future Slack steps
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-  uses: voxmedia/github-action-slack-notify-build@v1
+  uses: tallmanbrew/github-action-slack-notify-build-status@v1
   with:
     channel: app-alerts
     status: STARTING
@@ -50,7 +54,7 @@ Note: You must assign a step `id` to the first Slack notification step in order 
   if: success()
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-  uses: voxmedia/github-action-slack-notify-build@v1
+  uses: tallmanbrew/github-action-slack-notify-build-status@v1
   with:
     # Updates existing message from the first step
     message_id: ${{ steps.slack.outputs.message_id }}
@@ -70,7 +74,7 @@ You can use the `success()` and `failure()` conditional checks within your workf
   if: success()
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-  uses: voxmedia/github-action-slack-notify-build@v1
+  uses: tallmanbrew/github-action-slack-notify-build-status@v1
   with:
     channel: app-alerts
     status: SUCCESS
@@ -80,7 +84,7 @@ You can use the `success()` and `failure()` conditional checks within your workf
   if: failure()
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-  uses: voxmedia/github-action-slack-notify-build@v1
+  uses: tallmanbrew/github-action-slack-notify-build-status@v1
   with:
     channel: app-alerts
     status: FAILED
